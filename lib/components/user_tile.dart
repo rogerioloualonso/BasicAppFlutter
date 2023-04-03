@@ -1,4 +1,5 @@
 import 'package:exemplo/models/user.dart';
+import 'package:exemplo/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class UserTile extends StatelessWidget {
@@ -8,7 +9,11 @@ class UserTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final avatar = CircleAvatar(backgroundImage: NetworkImage(user.avatarUrl));
+    final avatar = user.avatarUrl == null || user.avatarUrl.isEmpty
+        ? CircleAvatar(
+            child: Icon(Icons.person),
+          )
+        : CircleAvatar(backgroundImage: NetworkImage(user.avatarUrl));
 
     return ListTile(
         leading: avatar,
@@ -20,7 +25,10 @@ class UserTile extends StatelessWidget {
             IconButton(
               icon: Icon(Icons.edit),
               color: Colors.orange,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context)
+                    .pushNamed(AppRoutes.USER_FORM, arguments: user);
+              },
             ),
             IconButton(
               icon: Icon(Icons.delete),
