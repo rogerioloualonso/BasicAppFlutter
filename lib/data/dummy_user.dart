@@ -8,13 +8,13 @@ const DUMMY_USERS = {
       avatarUrl:
           'https://cdn.pixabay.com/photo/2016/03/31/20/31/amazed-1295833_960_720.png'),
   '2': User(
-      id: '1',
+      id: '2',
       name: 'João',
       email: 'João@alunos.com.br',
       avatarUrl:
           'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png'),
   '3': User(
-      id: '1',
+      id: '3',
       name: 'Zézinho',
       email: 'Zézinho@alunos.com.br',
       avatarUrl:

@@ -35,7 +35,7 @@ class UserForm extends StatelessWidget {
                 _form.currentState?.save();
                 Provider.of<Users>(context, listen: false).put(
                   User(
-                    id: _formData['id']!,
+                    id: _formData['id'] == null ? '' : _formData['id']!,
                     name: _formData['name']!,
                     email: _formData['email']!,
                     avatarUrl: _formData['avatarUrl']!,
