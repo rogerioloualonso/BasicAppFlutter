@@ -1,13 +1,12 @@
 import 'dart:math';
-
-import 'package:exemplo/data/dummy_user.dart';
-import 'package:exemplo/models/user.dart';
+import 'package:exemplo/data/dummy_endereco.dart';
+import 'package:exemplo/models/endereco.dart';
 import 'package:flutter/material.dart';
 
-class Users with ChangeNotifier {
-  Map<String, User> _items = {...DUMMY_USERS};
+class Enderecos with ChangeNotifier {
+  Map<String, Endereco> _items = {...DUMMY_ENDERECO};
 
-  List<User> get all {
+  List<Endereco> get all {
     return [..._items.values];
   }
 
@@ -15,45 +14,54 @@ class Users with ChangeNotifier {
     return _items.length;
   }
 
-  User byIndex(int i) {
+  Endereco byIndex(int i) {
     return _items.values.elementAt(i);
   }
 
-  void put(User user) {
-    if (user == null) {
+  void put(Endereco endereco) {
+    if (endereco == null) {
       return;
     }
 
-    if (user.id != null &&
-        !user.id.trim().isEmpty &&
-        _items.containsKey(user.id)) {
+    if (endereco.id != null &&
+        !endereco.id.trim().isEmpty &&
+        _items.containsKey(endereco.id)) {
       _items.update(
-        user.id,
-        (_) => User(
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            avatarUrl: user.avatarUrl),
+        endereco.id,
+        (_) => Endereco(
+            id: endereco.id,
+            descricao: endereco.descricao,
+            cep: endereco.cep,
+            rua: endereco.rua,
+            numero: endereco.numero,
+            complemento: endereco.complemento,
+            bairro: endereco.bairro,
+            municipio: endereco.municipio,
+            estado: endereco.estado),
       );
     } else {
       final id = Random().nextDouble().toString();
       _items.putIfAbsent(
         id,
-        () => User(
-          id: id,
-          name: user.name,
-          email: user.email,
-          avatarUrl: user.avatarUrl,
-        ),
+        () => Endereco(
+            id: id,
+            descricao: endereco.descricao,
+            cep: endereco.cep,
+            rua: endereco.rua,
+            numero: endereco.numero,
+            complemento: endereco.complemento,
+            bairro: endereco.bairro,
+            municipio: endereco.municipio,
+            estado: endereco.estado),
       );
     }
 
     notifyListeners(); //Notifica que teve alteração
   }
 
-  void remove(User user) {
-    if (user != null && user.id != null) {
-      _items.remove(user.id);
+  void remove(Endereco endereco) {
+    if (endereco != null && endereco.id != null) {
+      _items.remove(endereco.id);
       notifyListeners();
     }
   }

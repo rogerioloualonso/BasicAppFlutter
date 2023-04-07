@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (ctx) => Users(),
+          create: (ctx) => Enderecos(),
         )
       ],
       child: MaterialApp(
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         routes: {
-          AppRoutes.HOME: (_) => UserList(),
+          AppRoutes.HOME: (_) => EnderecoList(),
           AppRoutes.USER_FORM: (_) => UserForm(),
         },
       ),

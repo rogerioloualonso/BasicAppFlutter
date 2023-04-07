@@ -1,28 +1,24 @@
-import 'package:exemplo/models/user.dart';
+import 'package:exemplo/models/endereco.dart';
 import 'package:exemplo/provider/users.dart';
 import 'package:exemplo/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter/src/widgets/basic.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class UserTile extends StatelessWidget {
-  final User user;
+  final Endereco endereco;
 
-  const UserTile(this.user);
+  const UserTile(this.endereco);
 
   @override
   Widget build(BuildContext context) {
-    final avatar = user.avatarUrl == null || user.avatarUrl.isEmpty
-        ? CircleAvatar(
-            child: Icon(Icons.person),
-          )
-        : CircleAvatar(backgroundImage: NetworkImage(user.avatarUrl));
+    final avatar = CircleAvatar(
+      child: Icon(Icons.house_outlined),
+    );
 
     return ListTile(
         leading: avatar,
-        title: Text(user.name),
-        subtitle: Text(user.email),
+        title: Text(endereco.descricao),
+        subtitle: Text(endereco.rua),
         trailing: Container(
           width: 100,
           child: Row(children: <Widget>[
@@ -31,7 +27,7 @@ class UserTile extends StatelessWidget {
               color: Colors.orange,
               onPressed: () {
                 Navigator.of(context)
-                    .pushNamed(AppRoutes.USER_FORM, arguments: user);
+                    .pushNamed(AppRoutes.USER_FORM, arguments: endereco);
               },
             ),
             IconButton(
@@ -56,7 +52,8 @@ class UserTile extends StatelessWidget {
                   ),
                 ).then((confirmed) {
                   if (confirmed) {
-                    Provider.of<Users>(context, listen: false).remove(user);
+                    Provider.of<Enderecos>(context, listen: false)
+                        .remove(endereco);
                   }
                 });
               },

@@ -1,4 +1,4 @@
-import 'package:exemplo/models/user.dart';
+import 'package:exemplo/models/endereco.dart';
 import 'package:exemplo/provider/users.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,38 +7,48 @@ class UserForm extends StatelessWidget {
   final _form = GlobalKey<FormState>();
   final Map<String, String> _formData = {};
 
-  void _loadFormData(User user) {
-    if (user != null) {
-      _formData['id'] = user.id;
-      _formData['name'] = user.name;
-      _formData['email'] = user.email;
-      _formData['avatarUrl'] = user.avatarUrl;
+  void _loadFormData(Endereco endereco) {
+    if (endereco != null) {
+      _formData['id'] = endereco.id;
+      _formData['descricao'] = endereco.descricao;
+      _formData['cep'] = endereco.cep;
+      _formData['rua'] = endereco.rua;
+      _formData['numero'] = endereco.numero;
+      _formData['complemento'] = endereco.complemento;
+      _formData['bairro'] = endereco.bairro;
+      _formData['municipio'] = endereco.municipio;
+      _formData['estado'] = endereco.estado;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final userTest = ModalRoute.of(context)?.settings.arguments;
+    final enderecoTest = ModalRoute.of(context)?.settings.arguments;
 
-    if (userTest != null) {
-      final user = ModalRoute.of(context)!.settings.arguments as User;
-      _loadFormData(user);
+    if (enderecoTest != null) {
+      final endereco = ModalRoute.of(context)!.settings.arguments as Endereco;
+      _loadFormData(endereco);
     }
 
     return Scaffold(
-        appBar: AppBar(title: Text('Formulário de Usuários'), actions: <Widget>[
+        appBar: AppBar(title: Text('Cadastro'), actions: <Widget>[
           IconButton(
             icon: Icon(Icons.save),
             onPressed: () {
               final isValid = _form.currentState!.validate();
               if (isValid) {
                 _form.currentState?.save();
-                Provider.of<Users>(context, listen: false).put(
-                  User(
+                Provider.of<Enderecos>(context, listen: false).put(
+                  Endereco(
                     id: _formData['id'] == null ? '' : _formData['id']!,
-                    name: _formData['name']!,
-                    email: _formData['email']!,
-                    avatarUrl: _formData['avatarUrl']!,
+                    descricao: _formData['descricao']!,
+                    cep: _formData['cep']!,
+                    rua: _formData['rua']!,
+                    numero: _formData['numero']!,
+                    complemento: _formData['complemento']!,
+                    bairro: _formData['bairro']!,
+                    municipio: _formData['municipio']!,
+                    estado: _formData['estado']!,
                   ),
                 );
                 Navigator.of(context).pop();
@@ -47,34 +57,72 @@ class UserForm extends StatelessWidget {
           )
         ]),
         body: Padding(
-          padding: EdgeInsets.all(15),
+          padding: EdgeInsets.all(20),
           child: Form(
               key: _form,
-              child: Column(children: <Widget>[
+              child: ListView(children: <Widget>[
                 TextFormField(
-                  initialValue: _formData['name'],
-                  decoration: InputDecoration(labelText: 'Nome'),
+                  initialValue: _formData['descricao'],
+                  decoration: InputDecoration(labelText: 'Descrição'),
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return 'Nome inválido';
+                      return 'Descrição inválida';
                     }
                     if (value.trim().length <= 3) {
-                      return 'Nme muito pequeno, no mínimo 3 letras.';
+                      return 'Descrição muito pequena, no mínimo 3 letras.';
                     }
                     return null;
                   },
-                  onSaved: (value) => _formData['name'] = value!,
+                  onSaved: (value) => _formData['descricao'] = value!,
                 ),
                 TextFormField(
-                  initialValue: _formData['email'],
-                  decoration: InputDecoration(labelText: 'Email'),
-                  onSaved: (value) => _formData['email'] = value!,
+                  initialValue: _formData['cep'],
+                  decoration: InputDecoration(labelText: 'cep'),
+                  onSaved: (value) => _formData['cep'] = value!,
+                  keyboardType: TextInputType.number,
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text('Buscar CEP'),
+                  style: ButtonStyle(
+                      minimumSize: MaterialStateProperty.all(Size(10, 35))),
                 ),
                 TextFormField(
-                  initialValue: _formData['avatarUrl'],
-                  decoration: InputDecoration(labelText: 'Url do avatar'),
-                  onSaved: (value) => _formData['avatarUrl'] = value!,
+                  initialValue: _formData['rua'],
+                  decoration: InputDecoration(labelText: 'rua'),
+                  onSaved: (value) => _formData['rua'] = value!,
+                  enabled: false,
                 ),
+                TextFormField(
+                  initialValue: _formData['bairro'],
+                  decoration: InputDecoration(labelText: 'bairro'),
+                  onSaved: (value) => _formData['bairro'] = value!,
+                  enabled: false,
+                ),
+                TextFormField(
+                  initialValue: _formData['municipio'],
+                  decoration: InputDecoration(labelText: 'municipio'),
+                  onSaved: (value) => _formData['municipio'] = value!,
+                  enabled: false,
+                ),
+                TextFormField(
+                  initialValue: _formData['estado'],
+                  decoration: InputDecoration(labelText: 'estado'),
+                  onSaved: (value) => _formData['estado'] = value!,
+                  enabled: false,
+                ),
+                TextFormField(
+                  initialValue: _formData['numero'],
+                  decoration: InputDecoration(labelText: 'numero'),
+                  onSaved: (value) => _formData['numero'] = value!,
+                  keyboardType: TextInputType.number,
+                ),
+                TextFormField(
+                  initialValue: _formData['complemento'],
+                  decoration: InputDecoration(labelText: 'complemento'),
+                  onSaved: (value) => _formData['complemento'] = value!,
+                  keyboardType: TextInputType.number,
+                )
               ])),
         ));
   }
