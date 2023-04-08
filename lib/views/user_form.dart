@@ -3,8 +3,14 @@ import 'package:exemplo/provider/users.dart';
 import 'package:exemplo/service/enderecoService.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:exemplo/routes/app_routes.dart';
 
-class UserForm extends StatelessWidget {
+class UserForm extends StatefulWidget {
+  @override
+  _UserFormState createState() => _UserFormState();
+}
+
+class _UserFormState extends State<UserForm> {
   final _form = GlobalKey<FormState>();
   final Map<String, String> _formData = {};
 
@@ -19,7 +25,51 @@ class UserForm extends StatelessWidget {
       _formData['bairro'] = endereco.bairro;
       _formData['municipio'] = endereco.municipio;
       _formData['estado'] = endereco.estado;
+    } else {
+      _formData['id'] = '';
+      _formData['descricao'] = '';
+      _formData['cep'] = '';
+      _formData['rua'] = '';
+      _formData['numero'] = '';
+      _formData['complemento'] = '';
+      _formData['bairro'] = '';
+      _formData['municipio'] = '';
+      _formData['estado'] = '';
     }
+    _atualizarForm();
+  }
+
+  TextEditingController controllerRua = TextEditingController();
+  TextEditingController controllerBairro = TextEditingController();
+  TextEditingController controllerMunicipio = TextEditingController();
+  TextEditingController controllerEstado = TextEditingController();
+
+  /*
+  @override
+  void initState() {
+    super.initState();
+    controllerRua.text = _formData['rua'].toString();
+    controllerBairro.text = _formData['bairro'].toString();
+    controllerMunicipio.text = _formData['municipio'].toString();
+    controllerEstado.text = _formData['estado'].toString();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    controllerRua.text = _formData['rua'].toString();
+    controllerBairro.text = _formData['bairro'].toString();
+    controllerMunicipio.text = _formData['municipio'].toString();
+    controllerEstado.text = _formData['estado'].toString();
+  }*/
+
+  void _atualizarForm() {
+    setState(() {
+      controllerRua.text = _formData['rua'].toString();
+      controllerBairro.text = _formData['bairro'].toString();
+      controllerMunicipio.text = _formData['municipio'].toString();
+      controllerEstado.text = _formData['estado'].toString();
+    });
   }
 
   @override
@@ -88,32 +138,33 @@ class UserForm extends StatelessWidget {
                     String cep = _formData['cep']!;
                     Endereco enderecoResult =
                         await EnderecoService().buscarEnderecoPorCEP(cep);
-                    String teste = 'a';
+                    _loadFormData(enderecoResult);
+                    _atualizarForm();
                   },
                   child: Text('Buscar CEP'),
                   style: ButtonStyle(
                       minimumSize: MaterialStateProperty.all(Size(10, 35))),
                 ),
                 TextFormField(
-                  initialValue: _formData['rua'],
+                  controller: controllerRua..text,
                   decoration: InputDecoration(labelText: 'rua'),
                   onSaved: (value) => _formData['rua'] = value!,
                   enabled: false,
                 ),
                 TextFormField(
-                  initialValue: _formData['bairro'],
+                  controller: controllerBairro..text,
                   decoration: InputDecoration(labelText: 'bairro'),
                   onSaved: (value) => _formData['bairro'] = value!,
                   enabled: false,
                 ),
                 TextFormField(
-                  initialValue: _formData['municipio'],
+                  controller: controllerMunicipio..text,
                   decoration: InputDecoration(labelText: 'municipio'),
                   onSaved: (value) => _formData['municipio'] = value!,
                   enabled: false,
                 ),
                 TextFormField(
-                  initialValue: _formData['estado'],
+                  controller: controllerEstado..text,
                   decoration: InputDecoration(labelText: 'estado'),
                   onSaved: (value) => _formData['estado'] = value!,
                   enabled: false,
