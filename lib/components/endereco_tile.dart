@@ -27,7 +27,7 @@ class EnderecoTile extends StatelessWidget {
               color: Colors.orange,
               onPressed: () {
                 Navigator.of(context)
-                    .pushNamed(AppRoutes.USER_FORM, arguments: endereco);
+                    .pushNamed(AppRoutes.ENDERECO_FORM, arguments: endereco);
               },
             ),
             IconButton(

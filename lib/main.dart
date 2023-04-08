@@ -21,13 +21,13 @@ class MyApp extends StatelessWidget {
         )
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Basic Flutter',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
         routes: {
           AppRoutes.HOME: (_) => EnderecoList(),
-          AppRoutes.USER_FORM: (_) => EnderecoForm(),
+          AppRoutes.ENDERECO_FORM: (_) => EnderecoForm(),
         },
       ),
     );

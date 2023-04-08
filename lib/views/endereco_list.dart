@@ -16,7 +16,7 @@ class EnderecoList extends StatelessWidget {
             IconButton(
                 icon: Icon(Icons.add),
                 onPressed: () {
-                  Navigator.of(context).pushNamed(AppRoutes.USER_FORM);
+                  Navigator.of(context).pushNamed(AppRoutes.ENDERECO_FORM);
                 })
           ],
         ),
