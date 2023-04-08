@@ -66,7 +66,7 @@ class _UserFormState extends State<EnderecoForm> {
     return Scaffold(
         appBar: AppBar(title: Text('Cadastro'), actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.save),
+            icon: Icon(Icons.save_as_outlined),
             onPressed: () {
               final isValid = _form.currentState!.validate();
               if (isValid) {
@@ -114,7 +114,8 @@ class _UserFormState extends State<EnderecoForm> {
                   onSaved: (value) => _formData['cep'] = value!,
                   keyboardType: TextInputType.number,
                 ),
-                ElevatedButton(
+                ElevatedButton.icon(
+                  icon: Icon(Icons.search),
                   onPressed: () async {
                     _form.currentState?.save();
                     String cep = _formData['cep']!;
@@ -131,7 +132,7 @@ class _UserFormState extends State<EnderecoForm> {
                       _ModalErroCEP();
                     }
                   },
-                  child: Text('Buscar CEP'),
+                  label: Text('Buscar CEP'),
                   style: ButtonStyle(
                       minimumSize: MaterialStateProperty.all(Size(10, 35))),
                 ),

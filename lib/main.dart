@@ -2,6 +2,7 @@ import 'package:exemplo/provider/enderecos.dart';
 import 'package:exemplo/routes/app_routes.dart';
 import 'package:exemplo/views/endereco_form.dart';
 import 'package:exemplo/views/endereco_list.dart';
+import 'package:exemplo/views/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,10 +24,11 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Basic Flutter',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.orange,
         ),
         routes: {
-          AppRoutes.HOME: (_) => EnderecoList(),
+          AppRoutes.HOME: (_) => Home(),
+          AppRoutes.ENDERECO_LIST: (_) => EnderecoList(),
           AppRoutes.ENDERECO_FORM: (_) => EnderecoForm(),
         },
       ),
