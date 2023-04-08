@@ -1,6 +1,7 @@
 import 'package:exemplo/models/endereco.dart';
 import 'package:exemplo/provider/enderecos.dart';
 import 'package:exemplo/service/enderecoService.dart';
+import 'package:exemplo/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:exemplo/routes/app_routes.dart';
@@ -117,10 +118,14 @@ class _UserFormState extends State<EnderecoForm> {
                   onPressed: () async {
                     _form.currentState?.save();
                     String cep = _formData['cep']!;
-                    Endereco enderecoResult =
-                        await EnderecoService().buscarEnderecoPorCEP(cep);
-                    _loadFormData(enderecoResult);
-                    _atualizarForm();
+                    if (Utils.validarCEP(cep)) {
+                      Endereco enderecoResult =
+                          await EnderecoService().buscarEnderecoPorCEP(cep);
+                      _loadFormData(enderecoResult);
+                      _atualizarForm();
+                    } else {
+                      _ModalErroCEP();
+                    }
                   },
                   child: Text('Buscar CEP'),
                   style: ButtonStyle(
@@ -164,5 +169,40 @@ class _UserFormState extends State<EnderecoForm> {
                 )
               ])),
         ));
+  }
+
+  Future<void> _ModalErroCEP() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Erro!'),
+          backgroundColor: Color.fromARGB(255, 254, 197, 127),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text('Ocorreu um dos erros a seguir:'),
+                Text(' '),
+                Text('- CEP fora do padrão esperado.'),
+                Text('- CEP inválido.')
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            ElevatedButton(
+              style: TextButton.styleFrom(
+                foregroundColor: Color.fromARGB(255, 254, 197, 127),
+                backgroundColor: Colors.white,
+              ),
+              child: const Text('Ok'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
