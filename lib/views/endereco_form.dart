@@ -121,8 +121,12 @@ class _UserFormState extends State<EnderecoForm> {
                     if (Utils.validarCEP(cep)) {
                       Endereco enderecoResult =
                           await EnderecoService().buscarEnderecoPorCEP(cep);
-                      _loadFormData(enderecoResult);
-                      _atualizarForm();
+                      if (enderecoResult.descricao == 'erro') {
+                        _ModalErroCEP();
+                      } else {
+                        _loadFormData(enderecoResult);
+                        _atualizarForm();
+                      }
                     } else {
                       _ModalErroCEP();
                     }
@@ -185,7 +189,8 @@ class _UserFormState extends State<EnderecoForm> {
                 Text('Ocorreu um dos erros a seguir:'),
                 Text(' '),
                 Text('- CEP fora do padrão esperado.'),
-                Text('- CEP inválido.')
+                Text('- CEP inválido.'),
+                Text('- CEP não encontrado.')
               ],
             ),
           ),
