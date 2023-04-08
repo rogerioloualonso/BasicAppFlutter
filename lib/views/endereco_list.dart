@@ -1,5 +1,5 @@
-import 'package:exemplo/components/user_tile.dart';
-import 'package:exemplo/provider/users.dart';
+import 'package:exemplo/components/endereco_tile.dart';
+import 'package:exemplo/provider/enderecos.dart';
 import 'package:exemplo/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +22,7 @@ class EnderecoList extends StatelessWidget {
         ),
         body: ListView.builder(
           itemCount: enderecos.count,
-          itemBuilder: (ctx, i) => UserTile(enderecos.byIndex(i)),
+          itemBuilder: (ctx, i) => EnderecoTile(enderecos.byIndex(i)),
         ));
   }
 }

@@ -1,16 +1,16 @@
 import 'package:exemplo/models/endereco.dart';
-import 'package:exemplo/provider/users.dart';
+import 'package:exemplo/provider/enderecos.dart';
 import 'package:exemplo/service/enderecoService.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:exemplo/routes/app_routes.dart';
 
-class UserForm extends StatefulWidget {
+class EnderecoForm extends StatefulWidget {
   @override
   _UserFormState createState() => _UserFormState();
 }
 
-class _UserFormState extends State<UserForm> {
+class _UserFormState extends State<EnderecoForm> {
   final _form = GlobalKey<FormState>();
   final Map<String, String> _formData = {};
 
@@ -43,25 +43,6 @@ class _UserFormState extends State<UserForm> {
   TextEditingController controllerBairro = TextEditingController();
   TextEditingController controllerMunicipio = TextEditingController();
   TextEditingController controllerEstado = TextEditingController();
-
-  /*
-  @override
-  void initState() {
-    super.initState();
-    controllerRua.text = _formData['rua'].toString();
-    controllerBairro.text = _formData['bairro'].toString();
-    controllerMunicipio.text = _formData['municipio'].toString();
-    controllerEstado.text = _formData['estado'].toString();
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    controllerRua.text = _formData['rua'].toString();
-    controllerBairro.text = _formData['bairro'].toString();
-    controllerMunicipio.text = _formData['municipio'].toString();
-    controllerEstado.text = _formData['estado'].toString();
-  }*/
 
   void _atualizarForm() {
     setState(() {

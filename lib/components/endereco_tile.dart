@@ -1,13 +1,13 @@
 import 'package:exemplo/models/endereco.dart';
-import 'package:exemplo/provider/users.dart';
+import 'package:exemplo/provider/enderecos.dart';
 import 'package:exemplo/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class UserTile extends StatelessWidget {
+class EnderecoTile extends StatelessWidget {
   final Endereco endereco;
 
-  const UserTile(this.endereco);
+  const EnderecoTile(this.endereco);
 
   @override
   Widget build(BuildContext context) {
