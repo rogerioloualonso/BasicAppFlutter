@@ -1,5 +1,6 @@
 import 'package:exemplo/models/endereco.dart';
 import 'package:exemplo/provider/users.dart';
+import 'package:exemplo/service/enderecoService.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -82,7 +83,13 @@ class UserForm extends StatelessWidget {
                   keyboardType: TextInputType.number,
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    _form.currentState?.save();
+                    String cep = _formData['cep']!;
+                    Endereco enderecoResult =
+                        await EnderecoService().buscarEnderecoPorCEP(cep);
+                    String teste = 'a';
+                  },
                   child: Text('Buscar CEP'),
                   style: ButtonStyle(
                       minimumSize: MaterialStateProperty.all(Size(10, 35))),
