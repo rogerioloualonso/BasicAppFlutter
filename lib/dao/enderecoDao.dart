@@ -62,7 +62,7 @@ class EnderecoDao {
 
   Future<void> updateEndereco(Endereco endereco) async {
     final conn = await MySqlConnection.connect(mysql.getSettings());
-
+    await conn;
     await conn.query('''
       UPDATE endereco
       SET descricao = ?, cep = ?, rua = ?, numero = ?, complemento = ?, bairro = ?, municipio = ?, estado = ?
