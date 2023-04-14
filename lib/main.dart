@@ -1,4 +1,4 @@
-import 'package:exemplo/provider/enderecos.dart';
+import 'package:exemplo/provider/enderecosProvider.dart';
 import 'package:exemplo/routes/app_routes.dart';
 import 'package:exemplo/views/endereco_form.dart';
 import 'package:exemplo/views/endereco_list.dart';
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (ctx) => Enderecos(),
+          create: (ctx) => EnderecosProvider(),
         )
       ],
       child: MaterialApp(

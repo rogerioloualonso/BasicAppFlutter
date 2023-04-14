@@ -1,5 +1,5 @@
 import 'package:exemplo/models/endereco.dart';
-import 'package:exemplo/provider/enderecos.dart';
+import 'package:exemplo/provider/enderecosProvider.dart';
 import 'package:exemplo/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -52,7 +52,7 @@ class EnderecoTile extends StatelessWidget {
                   ),
                 ).then((confirmed) {
                   if (confirmed) {
-                    Provider.of<Enderecos>(context, listen: false)
+                    Provider.of<EnderecosProvider>(context, listen: false)
                         .remove(endereco);
                   }
                 });

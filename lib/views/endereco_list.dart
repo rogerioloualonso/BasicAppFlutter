@@ -1,5 +1,5 @@
 import 'package:exemplo/components/endereco_tile.dart';
-import 'package:exemplo/provider/enderecos.dart';
+import 'package:exemplo/provider/enderecosProvider.dart';
 import 'package:exemplo/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 class EnderecoList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final Enderecos enderecos = Provider.of(context);
+    final EnderecosProvider enderecos = Provider.of(context);
 
     return Scaffold(
         appBar: AppBar(

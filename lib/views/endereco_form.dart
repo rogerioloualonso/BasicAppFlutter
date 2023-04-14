@@ -1,5 +1,5 @@
 import 'package:exemplo/models/endereco.dart';
-import 'package:exemplo/provider/enderecos.dart';
+import 'package:exemplo/provider/enderecosProvider.dart';
 import 'package:exemplo/service/enderecoService.dart';
 import 'package:exemplo/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -71,7 +71,7 @@ class _UserFormState extends State<EnderecoForm> {
               final isValid = _form.currentState!.validate();
               if (isValid) {
                 _form.currentState?.save();
-                Provider.of<Enderecos>(context, listen: false).put(
+                Provider.of<EnderecosProvider>(context, listen: false).put(
                   Endereco(
                     id: _formData['id'] == null ? '' : _formData['id']!,
                     descricao: _formData['descricao']!,
